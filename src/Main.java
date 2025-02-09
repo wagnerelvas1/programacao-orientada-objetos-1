@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Main {
   public static void main(String[] args) throws Exception {
-    Scanner ler = new Scanner(System.in);
+    Scanner input = new Scanner(System.in);
     String menuInicial = """
     +-----------------------------------+
     |           MENU INICIAL            |
@@ -71,19 +71,84 @@ public class Main {
     String[] menus = {menuInicial, menuAlunos, menuProfessores, menuMaterias, menuCursos};
     String menu = menus[0];
 
+    Curso.cadastrarCurso("Análise e Desenvolvimento de Sistemas", 6, "Noturno");
+    Curso.cadastrarCurso("Engenharia Civil", 10, "Integral");
+    Curso.cadastrarCurso("Engenharia de Controle e Automação", 10, "Integral");
+
+    Aluno.cadastrarAluno("Wagner", 10, Lista.cursos.get(0));
+    Aluno.cadastrarAluno("Ana", 15, Lista.cursos.get(1));
+    Aluno.cadastrarAluno("Joseph", 20, Lista.cursos.get(2));
+
     while(true) {
-      System.out.print(menu);
-      int entrada = ler.nextInt();
+      System.out.print("\n\n"+menu);
+      int entrada = input.nextInt();
 
       if(entrada == 0) {
         break;
       }
 
       if(menu == menus[0]) {
-        menu = menus[entrada];
+        switch(entrada) {
+          case 1: menu = menus[1]; break;
+          case 2: menu = menus[2]; break;
+          case 3: menu = menus[3]; break;
+          case 4: menu =  menus[4]; break;
+        }
       } else {
         if(entrada == 9) {
-            menu = menus[0];
+          menu = menus[0];
+        }
+
+        if(menu == menus[1]) {
+          switch(entrada) {
+            case 1: Lista.listarAlunosDetalhado();
+              break;
+
+            case 2: Aluno.cadastrarAluno();
+              break;
+              
+            case 3: Aluno.excluirAluno();
+              break;
+              
+          }
+        } else if(menu == menus[2]) {
+          switch(entrada) {
+            case 1: Lista.listarProfessoresDetalhado();
+              break;
+
+            case 2: Professor.cadastrarProfessor();
+              break;
+              
+            case 3: Professor.excluirProfessor();
+              break;
+    
+          }
+        } else if(menu == menus[3]) {
+          switch(entrada) {
+            case 1:
+              break;
+            case 2:
+              break;
+              
+            case 3:
+              break;
+              
+            case 4:
+              break;
+              
+          }
+        } else if(menu == menus[4]) {
+          switch(entrada) {
+            case 1: Lista.listarCursosDetalhado();
+              break;
+
+            case 2: Curso.cadastrarCurso();
+              break;
+    
+            case 3: Curso.excluirCurso();
+              break;
+              
+          }
         }
       }
     }

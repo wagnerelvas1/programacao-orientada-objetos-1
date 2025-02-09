@@ -1,10 +1,8 @@
 public class Pessoa {
-  protected int id;
   protected String nome;
   protected int idade;
 
-  public Pessoa(int id, String nome, int idade) {
-    this.id = id;
+  public Pessoa(String nome, int idade) {
     this.nome = nome;
     this.idade = idade;
   }
