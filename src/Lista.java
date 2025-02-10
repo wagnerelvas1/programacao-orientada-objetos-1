@@ -28,15 +28,18 @@ public class Lista {
     }
   }
 
-  public static void listarAlunosPorCurso(Curso curso) {
+  public static ArrayList<Aluno> listarAlunosPorCurso(Curso curso) {
     int contador = 1;
+    ArrayList<Aluno> alunosCurso = new ArrayList<>();
     System.out.print("LISTA DE ALUNOS: \n");
     for (Aluno aluno : alunos) {
       if(aluno.curso == curso) {
         System.out.print(contador + "- " + aluno.nome + " - Idade: " + aluno.idade + " anos - Curso: " + aluno.curso.nome + ".\n");
+        alunosCurso.add(aluno);
         contador++;
       }
     }
+    return alunosCurso;
   }
 
 

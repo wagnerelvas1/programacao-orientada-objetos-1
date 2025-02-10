@@ -7,18 +7,16 @@ public class Materia {
   public Professor professor;
   public ArrayList<Aluno> alunosMateria = new ArrayList<>();
 
-  public Materia(String nome, Curso curso, Professor professor, String[] alunos) {
+  public Materia(String nome, Curso curso, Professor professor, ArrayList<Aluno> alunos) {
     this.nome = nome;
     this.curso = curso;
     this.professor = professor;
-    for(String aluno : alunos) {
-      int index = Integer.parseInt(aluno) - 1;
-      Aluno x = Lista.alunos.get(index);
-      this.alunosMateria.add(x);
+    for(Aluno aluno : alunos) {
+      this.alunosMateria.add(aluno);
     }
   }
 
-  public static void cadastrarMateria() {
+  public static void cadastrarMateria() {                 // Juro que foi o único lugar que usamos chat (e foi só um pouco)
     Scanner ler = new Scanner(System.in);
     System.out.print("\n\n" + """
     +-----------------------------------+
@@ -39,17 +37,24 @@ public class Materia {
     option = ler.nextInt();
     Curso curso = Lista.cursos.get(option-1);
 
-    Lista.listarAlunosPorCurso(curso);
-    System.out.print("Insira os números dos alunos da matéria\n(Ex: 1 2 3 4 5): ");
+    ArrayList<Aluno> alunosSelecionados = new ArrayList<>();
+    ArrayList<Aluno> listaAlunos = Lista.listarAlunosPorCurso(curso);
+    System.out.print("Insira os números dos alunos da matéria\n(Ex: 1 2 3): ");
     ler.nextLine();
     String options = ler.nextLine();
-    String[] alunos = options.split(" ");
+    String[] numeros = options.split(" ");
 
-    Materia materia = new Materia(nome, curso, professor, alunos);
+    for(String indice : numeros) {
+      int index = Integer.parseInt(indice) - 1;
+      Aluno x = listaAlunos.get(index);
+      alunosSelecionados.add(x);
+    }
+
+    Materia materia = new Materia(nome, curso, professor, alunosSelecionados);
     Lista.materias.add(materia);
   }
 
-  public static void cadastrarMateria(String nome, Curso curso, Professor professor, String[] alunos) {
+  public static void cadastrarMateria(String nome, Curso curso, Professor professor, ArrayList<Aluno> alunos) {
     Materia materia = new Materia(nome, curso, professor, alunos);
     Lista.materias.add(materia);
   }

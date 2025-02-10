@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Main {
   public static void main(String[] args) throws Exception {
@@ -85,7 +86,11 @@ public class Main {
     Professor.cadastrarProfessor("Leandro", 90, "Engenheiro de Alguma Coisa", 900000);
     Professor.cadastrarProfessor("Willians", 88, "Engenheiro de Outra Coisa", 1000000);
 
-    String[] alunos = {"1", "2", "3"};
+    ArrayList<Aluno> alunos = new ArrayList<>();
+    alunos.add(Lista.alunos.get(0));
+    alunos.add(Lista.alunos.get(1));
+    alunos.add(Lista.alunos.get(2));
+
     Materia.cadastrarMateria("Programação Orientada a Objetos", Lista.cursos.get(0), Lista.professores.get(0), alunos);
 
     while(true) {
