@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Main {
   public static void main(String[] args) throws Exception {
-    Scanner input = new Scanner(System.in);
+    Scanner ler = new Scanner(System.in);
     String menuInicial = """
     +-----------------------------------+
     |           MENU INICIAL            |
@@ -75,13 +75,22 @@ public class Main {
     Curso.cadastrarCurso("Engenharia Civil", 10, "Integral");
     Curso.cadastrarCurso("Engenharia de Controle e Automação", 10, "Integral");
 
-    Aluno.cadastrarAluno("Wagner", 10, Lista.cursos.get(0));
-    Aluno.cadastrarAluno("Ana", 15, Lista.cursos.get(1));
-    Aluno.cadastrarAluno("Joseph", 20, Lista.cursos.get(2));
+    Aluno.cadastrarAluno("Wagner", 18, Lista.cursos.get(0));
+    Aluno.cadastrarAluno("Robert", 15, Lista.cursos.get(0));
+    Aluno.cadastrarAluno("João", 20, Lista.cursos.get(0));
+    Aluno.cadastrarAluno("Pedro", 18, Lista.cursos.get(1));
+    Aluno.cadastrarAluno("Matheus", 15, Lista.cursos.get(1));
+    Aluno.cadastrarAluno("José", 20, Lista.cursos.get(2));
+
+    Professor.cadastrarProfessor("Leandro", 90, "Engenheiro de Alguma Coisa", 900000);
+    Professor.cadastrarProfessor("Willians", 88, "Engenheiro de Outra Coisa", 1000000);
+
+    String[] alunos = {"1", "2", "3"};
+    Materia.cadastrarMateria("Programação Orientada a Objetos", Lista.cursos.get(0), Lista.professores.get(0), alunos);
 
     while(true) {
       System.out.print("\n\n"+menu);
-      int entrada = input.nextInt();
+      int entrada = ler.nextInt();
 
       if(entrada == 0) {
         break;
@@ -93,6 +102,7 @@ public class Main {
           case 2: menu = menus[2]; break;
           case 3: menu = menus[3]; break;
           case 4: menu =  menus[4]; break;
+          default: System.out.println("\n\nPor favor, insira uma opção válida!"); break;
         }
       } else {
         if(entrada == 9) {
@@ -101,53 +111,32 @@ public class Main {
 
         if(menu == menus[1]) {
           switch(entrada) {
-            case 1: Lista.listarAlunosDetalhado();
-              break;
-
-            case 2: Aluno.cadastrarAluno();
-              break;
-              
-            case 3: Aluno.excluirAluno();
-              break;
-              
+            case 1: Lista.listarAlunosDetalhado(); break;
+            case 2: Aluno.cadastrarAluno(); break;
+            case 3: Aluno.excluirAluno(); break;
+            default: System.out.println("\n\nPor favor, insira uma opção válida!"); break;
           }
         } else if(menu == menus[2]) {
           switch(entrada) {
-            case 1: Lista.listarProfessoresDetalhado();
-              break;
-
-            case 2: Professor.cadastrarProfessor();
-              break;
-              
-            case 3: Professor.excluirProfessor();
-              break;
-    
+            case 1: Lista.listarProfessoresDetalhado(); break;
+            case 2: Professor.cadastrarProfessor(); break;
+            case 3: Professor.excluirProfessor(); break;
+            default: System.out.println("\n\nPor favor, insira uma opção válida!"); break;
           }
         } else if(menu == menus[3]) {
           switch(entrada) {
-            case 1:
-              break;
-            case 2:
-              break;
-              
-            case 3:
-              break;
-              
-            case 4:
-              break;
+            case 1: Lista.listarMateriasDetalhado(); break;
+            case 2: Materia.cadastrarMateria(); break;
+            case 3: Materia.excluirMateria(); break;
+            default: System.out.println("\n\nPor favor, insira uma opção válida!"); break;
               
           }
         } else if(menu == menus[4]) {
           switch(entrada) {
-            case 1: Lista.listarCursosDetalhado();
-              break;
-
-            case 2: Curso.cadastrarCurso();
-              break;
-    
-            case 3: Curso.excluirCurso();
-              break;
-              
+            case 1: Lista.listarCursosDetalhado(); break;
+            case 2: Curso.cadastrarCurso(); break;
+            case 3: Curso.excluirCurso(); break;
+            default: System.out.println("\n\nPor favor, insira uma opção válida!"); break;
           }
         }
       }

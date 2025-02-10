@@ -26,8 +26,6 @@ public class Aluno extends Pessoa {
     System.out.print("Insira o número do curso desejado: ");
     int option = ler.nextInt();
 
-    ler.close();
-
     Curso curso = Lista.cursos.get(option-1);
     
     Aluno aluno = new Aluno(nome, idade, curso);
@@ -52,9 +50,7 @@ public class Aluno extends Pessoa {
     ler.nextLine();
     String confirmar = ler.nextLine();
 
-    ler.close();
-
-    if(confirmar == "EXCLUIR") {
+    if(confirmar.equals("EXCLUIR")) {
       Lista.alunos.remove(option-1);
     }
   }

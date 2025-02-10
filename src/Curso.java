@@ -61,13 +61,12 @@ public class Curso {
 
     Curso curso = Lista.cursos.get(option-1);
 
-    // System.out.print("Para confirmar a exclusão de " + curso.nome + ", insira 'EXCLUIR': \n");
-    // String confirmar = ler.nextLine();
-
-    // if(confirmar == "EXCLUIR") {
-    //   System.out.println("SDKOAJSDMKOAD");
-    //   Lista.cursos.remove(option-1);
-    // }
-    Lista.cursos.remove(option-1);
+    System.out.print("Para confirmar a exclusão de " + curso.nome + ", insira 'EXCLUIR': ");
+    ler.nextLine();
+    String confirmar = ler.nextLine();
+    
+    if(confirmar.equals("EXCLUIR")) {
+      Lista.cursos.remove(option-1);
+    }
   }
 }

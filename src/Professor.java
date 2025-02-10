@@ -31,8 +31,6 @@ public class Professor extends Pessoa {
     System.out.print("Salário: ");
     float salario = ler.nextFloat();
 
-    ler.close();
-    
     Professor professor = new Professor(nome, idade, formacao, salario);
     Lista.professores.add(professor);
   }
@@ -51,13 +49,12 @@ public class Professor extends Pessoa {
 
     Professor professor = Lista.professores.get(option-1);
 
-    // System.out.print("Para confirmar a exclusão de " + aluno.nome + ", insira 'EXCLUIR': \n");
-    // String confirmar = ler.nextLine();
+    System.out.print("Para confirmar a exclusão de " + professor.nome + ", insira 'EXCLUIR': ");
+    ler.nextLine();
+    String confirmar = ler.nextLine();
 
-    // if(confirmar == "EXCLUIR") {
-    //   System.out.println("SDKOAJSDMKOAD");
-    //   Lista.alunos.remove(option-1);
-    // }
-    Lista.professores.remove(option-1);
+    if(confirmar.equals("EXCLUIR")) {
+      Lista.professores.remove(option-1);
+    }
   }
 }
