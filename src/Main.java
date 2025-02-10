@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 public class Main {
   public static void main(String[] args) throws Exception {
@@ -95,7 +96,18 @@ public class Main {
 
     while(true) {
       System.out.print("\n\n"+menu);
-      int entrada = ler.nextInt();
+      int entrada = -1;
+      boolean opcaoValida = false;
+
+      while(!opcaoValida) {
+        try {
+          entrada = ler.nextInt();
+          opcaoValida = true;
+        } catch (InputMismatchException e) {
+          ler.nextLine();
+          System.out.print("Por favor, insira um número!\n-> ");
+        }
+      }
 
       if(entrada == 0) {
         break;
