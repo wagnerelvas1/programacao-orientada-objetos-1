@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Materia {
@@ -16,8 +17,9 @@ public class Materia {
     }
   }
 
-  public static void cadastrarMateria() {                 // Juro que foi o único lugar que usamos chat (e foi só um pouco)
+  public static void cadastrarMateria() {
     Scanner ler = new Scanner(System.in);
+    String nome = "";
     System.out.print("\n\n" + """
     +-----------------------------------+
     |        CADASTRO DE MATERIA        |
@@ -25,17 +27,43 @@ public class Materia {
     """);
 
     System.out.print("Nome: ");
-    String nome = ler.nextLine();
+    nome = ler.nextLine();
 
-    Lista.listarProfessores();
-    System.out.print("Insira o número do professor da matéria: ");
-    int option = ler.nextInt();
-    Professor professor = Lista.professores.get(option-1);
+    Professor professor = null;
+    boolean professorValido = false;
+    while(!professorValido) {
+      Lista.listarProfessores();
+      System.out.print("Insira o número do professor da matéria: ");
+      try {
+        int option = ler.nextInt();
+        professor = Lista.professores.get(option-1);
+        professorValido = true;
+      } catch (InputMismatchException e) {
+        ler.nextLine();
+        System.out.print("\nPor favor, insira um número!\n");
+      } catch (IndexOutOfBoundsException e) {
+        ler.nextLine();
+        System.out.print("\nPor favor, insira um valor válido!\n");
+      }
+    }
 
-    Lista.listarCursos();
-    System.out.print("Insira o número do curso da matéria: ");
-    option = ler.nextInt();
-    Curso curso = Lista.cursos.get(option-1);
+    Curso curso = null;
+    boolean cursoValido = false;
+    while(!cursoValido) {
+      Lista.listarCursos();
+      System.out.print("Insira o número do curso da matéria: ");
+      try {
+        int option = ler.nextInt();
+        curso = Lista.cursos.get(option-1);
+        cursoValido = true;
+      } catch (InputMismatchException e) {
+        ler.nextLine();
+        System.out.print("\nPor favor, insira um número!\n");
+      } catch (IndexOutOfBoundsException e) {
+        ler.nextLine();
+        System.out.print("\nPor favor, insira um valor válido!\n");
+      }
+    }
 
     ArrayList<Aluno> alunosSelecionados = new ArrayList<>();
     ArrayList<Aluno> listaAlunos = Lista.listarAlunosPorCurso(curso);
@@ -52,6 +80,7 @@ public class Materia {
 
     Materia materia = new Materia(nome, curso, professor, alunosSelecionados);
     Lista.materias.add(materia);
+    System.out.println("\nA matéria '" + materia.nome + "' do curso de " + materia.curso.nome + " foi cadastrada!");
   }
 
   public static void cadastrarMateria(String nome, Curso curso, Professor professor, ArrayList<Aluno> alunos) {
@@ -61,19 +90,35 @@ public class Materia {
 
   public static void excluirMateria() {
     Scanner ler = new Scanner(System.in);
-    Lista.listarMaterias();
+    int option = 0;
+    Materia materia = null;
+    boolean optionValida = false;
+    
+    while(!optionValida) {
+      Lista.listarMaterias();
+      System.out.print("\nInsira o número da matéria a ser excluída: ");
+      try {
+        option = ler.nextInt();
+        materia = Lista.materias.get(option-1);
+        optionValida = true;
+      } catch (InputMismatchException e) {
+        ler.nextLine();
+        System.out.print("\nPor favor, insira um número!\n");
+      } catch (IndexOutOfBoundsException e) {
+        ler.nextLine();
+        System.out.print("\nPor favor, insira um valor válido!\n");
+      }
+    }
 
-    System.out.print("\nInsira o número da matéria a ser excluída: ");    
-    int option = ler.nextInt();
-
-    Materia materia = Lista.materias.get(option-1);
-
-    System.out.print("Para confirmar a exclusão de " + materia.nome + ", insira 'EXCLUIR': ");
+    System.out.print("Para confirmar a exclusão de '" + materia.nome + "', insira 'EXCLUIR': ");
     ler.nextLine();
     String confirmar = ler.nextLine();
 
     if(confirmar.equals("EXCLUIR")) {
+      System.out.println("\nA matéria '" + materia.nome + "' foi excluída!");
       Lista.materias.remove(option-1);
+    } else {
+      System.out.println("\nA matéria '" + materia.nome + "' não foi excluída!");
     }
   }
 }
